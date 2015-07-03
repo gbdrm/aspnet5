@@ -15,7 +15,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Routing;
 using Microsoft.Data.Entity;
-using Microsoft.Framework.ConfigurationModel;
+using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
@@ -26,21 +26,22 @@ namespace aspnet5
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             // Setup configuration sources.
-            var configuration = new Configuration()
-                .AddJsonFile("config.json")
-                .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
-
+            // Setup configuration sources.
+            var configurationBuilder = new ConfigurationBuilder(appEnv.ApplicationBasePath)
+                                                        .AddJsonFile("config.json")
+                                                        .AddEnvironmentVariables();
             if (env.IsEnvironment("Development"))
             {
                 // This reads the configuration keys from the secret store.
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                configuration.AddUserSecrets();
+                configurationBuilder.AddUserSecrets();
             }
-            configuration.AddEnvironmentVariables();
-            Configuration = configuration;
+
+            configurationBuilder.AddEnvironmentVariables();
+            Configuration = configurationBuilder.Build();
         }
 
         public IConfiguration Configuration { get; set; }
@@ -49,7 +50,7 @@ namespace aspnet5
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Application settings to the services container.
-            services.Configure<AppSettings>(Configuration.GetSubKey("AppSettings"));
+            services.Configure<AppSettings>(Configuration.GetConfigurationSection("AppSettings"));
 
             // Add EF services to the services container.
             services.AddEntityFramework()
