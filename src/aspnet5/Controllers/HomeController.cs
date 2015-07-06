@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using aspnet5.Models;
 
 namespace aspnet5.Controllers
 {
@@ -11,6 +12,36 @@ namespace aspnet5.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Messages()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var model = db.Messages.OrderByDescending(_ => _.Time).Take(50);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Messages(string messageText)
+        {
+            if (!User.Identity.IsAuthenticated) return null;
+
+            var date = DateTime.Now;
+            var msg = new Message()
+            {
+                Author = User.Identity.Name,
+                //Date = date.ToShortDateString(),
+                Text = messageText,
+                Time = date.ToString()
+            };
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            db.Messages.Add(msg);
+            db.SaveChanges();
+
+            return Messages();
         }
 
         public IActionResult About()

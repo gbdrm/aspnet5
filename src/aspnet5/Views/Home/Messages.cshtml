@@ -1,0 +1,41 @@
+﻿@model IEnumerable<aspnet5.Models.Message>
+<div class="container">
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Home" asp-action="Messages" method="post" id="logoutForm">
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <input id="messageText" name="messageText" style="max-width:100%;" type="text" class="form-control" autofocus="autofocus" placeholder="Введите сообщение" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="submit">Отправить</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <h4 class="alert-warning" style="text-align:center;">Пожалуйста, <a href="~/account/register?returnUrl=~/home/messages">зарегистрируйтесь</a> или <a href="~/account/login?returnUrl=~/home/messages">войдите</a> для отправки сообщения</h4>
+                }
+                <div class="panel-body">
+                    <ul class="media-list">
+                        @foreach (var msg in Model)
+                        {
+                            <li>
+                                @msg.Text
+                                <br />
+                                <small class="text-muted">@msg.Author  -  @msg.Time</small>
+                                <hr />
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

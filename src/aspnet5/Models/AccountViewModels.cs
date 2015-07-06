@@ -85,6 +85,10 @@ namespace aspnet5.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Login")]
+        public string Login { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
