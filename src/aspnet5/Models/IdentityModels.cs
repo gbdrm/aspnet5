@@ -17,6 +17,8 @@ namespace aspnet5.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Message> Messages { get; set; }
+
         private static bool _created;
 
         public ApplicationDbContext()
@@ -27,6 +29,11 @@ namespace aspnet5.Models
                 Database.AsRelational().ApplyMigrations();
                 _created = true;
             }
+        }
+
+        protected override void OnConfiguring(EntityOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(Startup.Configuration["Data:DefaultConnection:ConnectionString"]);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
