@@ -9,6 +9,13 @@ namespace aspnet5.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db;
+
+        public HomeController(ApplicationDbContext dataContext)
+        {
+            db = dataContext;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -17,7 +24,6 @@ namespace aspnet5.Controllers
         [HttpGet]
         public IActionResult Messages()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
             var model = db.Messages.OrderByDescending(_ => _.Time).Take(50);
 
             return View(model);
@@ -37,7 +43,6 @@ namespace aspnet5.Controllers
                 Time = date.ToString()
             };
 
-            ApplicationDbContext db = new ApplicationDbContext();
             db.Messages.Add(msg);
             db.SaveChanges();
 
