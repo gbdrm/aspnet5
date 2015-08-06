@@ -1,4 +1,5 @@
 ﻿using aspnet5.Models;
+using aspnet5.Services;
 using Microsoft.AspNet.Authentication.Facebook;
 using Microsoft.AspNet.Authentication.MicrosoftAccount;
 using Microsoft.AspNet.Builder;
@@ -42,6 +43,8 @@ namespace aspnet5
             // добавляем в кофигурацию типизированные настройки из конфиг файла
             services.Configure<AppSettings>(Configuration.GetConfigurationSection("AppSettings"));
             services.Configure<DataSettings>(Configuration.GetConfigurationSection("Data:DefaultConnection"));
+
+            services.AddSingleton<TestService>();
 
             // Add EF services to the services container.
             services.AddEntityFramework()

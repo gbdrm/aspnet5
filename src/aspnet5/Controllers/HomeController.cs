@@ -4,12 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using aspnet5.Models;
+using aspnet5.Services;
 
 namespace aspnet5.Controllers
 {
     public class HomeController : Controller
     {
         private ApplicationDbContext db;
+
+        [FromServices]
+        public TestService TestService { get; set; }
 
         public HomeController(ApplicationDbContext dataContext)
         {
@@ -18,6 +22,8 @@ namespace aspnet5.Controllers
 
         public IActionResult Index()
         {
+            var test = TestService.TestName;
+
             return View();
         }
 
