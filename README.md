@@ -1,3 +1,7 @@
 # asp.net 5 beta5
 Sample ASP.NET 5 application
-Migration from beta4 to beta5
+
+Demo: http://aspdotnet.azurewebsites.net
+
+Details:
+http://habrahabr.ru/post/261703/ (Russian)
