@@ -1,4 +1,5 @@
 ﻿@using aspnet5
+@*регистрируем зависимость*@
 @inject IOptions<AppSettings> AppSettings
 <!DOCTYPE html>
 <html>
@@ -32,6 +33,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                        @*достаем значение в представлении из конфигурации*@
                         @AppSettings.Options.SiteTitle
                     </a>
                 </div>

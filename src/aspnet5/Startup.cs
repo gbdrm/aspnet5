@@ -39,6 +39,7 @@ namespace aspnet5
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Application settings to the services container.
+            // добавляем в кофигурацию типизированные настройки из конфиг файла
             services.Configure<AppSettings>(Configuration.GetConfigurationSection("AppSettings"));
             services.Configure<DataSettings>(Configuration.GetConfigurationSection("Data:DefaultConnection"));
 
