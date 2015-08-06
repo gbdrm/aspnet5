@@ -1,4 +1,5 @@
-﻿@inject IOptions<AppSettings> AppSettings
+﻿@using aspnet5
+@inject IOptions<AppSettings> AppSettings
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,13 +31,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">@AppSettings.Options.SiteTitle</a>
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                        @AppSettings.Options.SiteTitle
+                    </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         @*<li><a asp-controller="Home" asp-action="Index">Home</a></li>
-    <li><a asp-controller="Home" asp-action="About">About</a></li>
-    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>*@
+                            <li><a asp-controller="Home" asp-action="About">About</a></li>
+                            <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>*@
                         <li><a asp-controller="Home" asp-action="Messages">Сообщения</a></li>
                     </ul>
                     @await Html.PartialAsync("_LoginPartial")
