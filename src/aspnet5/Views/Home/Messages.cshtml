@@ -22,14 +22,17 @@
                 }
                 <div class="panel-body">
                     <ul class="media-list">
-                        @foreach (var msg in Model)
+                        @if (Model != null)
                         {
-                            <li>
-                                @msg.Text
-                                <br />
-                                <small class="text-muted">@msg.Author  -  @msg.Time</small>
-                                <hr />
-                            </li>
+                            foreach (var msg in Model)
+                            {
+                                <li>
+                                    @msg.Text
+                                    <br />
+                                    <small class="text-muted">@msg.Author  -  @msg.Time</small>
+                                    <hr />
+                                </li>
+                            }
                         }
                     </ul>
                 </div>

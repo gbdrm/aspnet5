@@ -1,0 +1,33 @@
+﻿@model aspnet5.Models.QuestTask
+<div class="container panel panel-info">
+    @if (User.Identity.IsAuthenticated)
+    {
+        if(ViewBag.Finished != null && ViewBag.Finished == true)
+        {
+            <h3>Все задания пройдены.</h3>
+            <h3>Спасибо, вы можете оставить ваши пожелания в <a href="~/home/messages">сообщениях</a>.</h3>
+            return;
+        }
+
+        <br />
+        <p class="lead">
+            @Model.Title
+        </p>
+        <h4>@Model.Content</h4>
+        <br />
+        <form method="POST">
+            <div class="form-group">
+                <input type="text" id="answer" name="answer" class="form-control" autofocus="autofocus" placeholder="">
+                <br />
+                <a href="" class="btn btn-info">Отправить</a>
+            </div>
+        </form>
+        <br />
+        @*<div>Просмотрено - @ViewBag.Watched</div>
+        <div>Пройдено - @ViewBag.Passed</div>*@
+    }
+    else
+    {
+        <h4 class="alert-warning" style="text-align:center;">Пожалуйста, <a href="~/account/register?returnUrl=~/home/test">зарегистрируйтесь</a> или <a href="~/account/login?returnUrl=~/home/test">войдите</a> для прохождения теста</h4>
+    }
+</div>

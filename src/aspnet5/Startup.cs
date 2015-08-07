@@ -53,7 +53,15 @@ namespace aspnet5
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
             // Add Identity services to the services container.
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(
+                    options => options.Password = new PasswordOptions
+                    {
+                        RequireDigit = false,
+                        RequiredLength = 4,
+                        RequireLowercase = false,
+                        RequireUppercase = false,
+                        RequireNonLetterOrDigit = false
+                    })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
