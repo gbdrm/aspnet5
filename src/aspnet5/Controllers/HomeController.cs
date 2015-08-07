@@ -34,7 +34,6 @@ namespace aspnet5.Controllers
             if (!User.Identity.IsAuthenticated) return View();
             var userId = User.GetUserId();
 
-            ApplicationDbContext db = new ApplicationDbContext();
             var stat = db.UserStats.SingleOrDefault(u => u.Token == userId);
 
             QuestTask task;
@@ -87,7 +86,6 @@ namespace aspnet5.Controllers
             if (!User.Identity.IsAuthenticated) return View();
 
             var date = DateTime.Now;
-            ApplicationDbContext db = new ApplicationDbContext();
             //var lastMessage = db.Messages.LastOrDefault(u => u.Author == User.Identity.Name);
             //if (lastMessage != null)
             //{
