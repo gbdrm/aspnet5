@@ -7,9 +7,19 @@ using aspnet5.Models;
 namespace aspnet5.Migrations
 {
     [ContextType(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class QuestTaskAndSUsertat
     {
-        public override void BuildModel(ModelBuilder builder)
+        public override string Id
+        {
+            get { return "20150708152652_QuestTaskAndSUsertat"; }
+        }
+        
+        public override string ProductVersion
+        {
+            get { return "7.0.0-beta5-13549"; }
+        }
+        
+        public override void BuildTargetModel(ModelBuilder builder)
         {
             builder
                 .Annotation("SqlServer:ValueGeneration", "Identity");
@@ -162,21 +172,6 @@ namespace aspnet5.Migrations
                     b.Property<int>("Number");
                     
                     b.Property<string>("Title");
-                    
-                    b.Key("Id");
-                });
-            
-            builder.Entity("aspnet5.Models.UserAnswer", b =>
-                {
-                    b.Property<int>("Id")
-                        .GenerateValueOnAdd()
-                        .StoreGeneratedPattern(StoreGeneratedPattern.Identity);
-                    
-                    b.Property<string>("Answer");
-                    
-                    b.Property<int>("TaskNumber");
-                    
-                    b.Property<string>("UserId");
                     
                     b.Key("Id");
                 });

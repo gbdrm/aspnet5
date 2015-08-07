@@ -8,6 +8,15 @@
 <form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
     <h4>Create a new account.</h4>
     <hr />
+    @if(ViewBag.TryAdminLogin != null && ViewBag.TryAdminLogin == true)
+    {
+        <h3 style="color:red;">Please do not use ADMIN substring in your login</h3>
+    }
+
+    @if (ViewBag.wrongEmail != null && ViewBag.wrongEmail == true)
+    {
+        <h3 style="color:red;">Please enter valid email</h3>
+    }
     <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Login" class="col-md-2 control-label"></label>

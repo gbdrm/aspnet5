@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Metadata;
-using Microsoft.Framework.OptionsModel;
 
 namespace aspnet5.Models
 {
@@ -18,6 +11,12 @@ namespace aspnet5.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Message> Messages { get; set; }
+
+        public DbSet<UserAnswer> UserAnswers { get; set; }
+
+        public DbSet<QuestTask> QuestTasks { get; set; }
+
+        public DbSet<UserStat> UserStats { get; set; }
 
         private static bool _created;
 

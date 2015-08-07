@@ -11,6 +11,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using aspnet5;
 using aspnet5.Models;
+using System.Text.RegularExpressions;
 
 namespace aspnet5.Controllers
 {
@@ -89,6 +90,26 @@ namespace aspnet5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            if(model != null && model.Login.ToLower().Contains("admin"))
+            {
+                ViewBag.TryAdminLogin = true;
+                return View();
+            }
+            else
+            {
+                ViewBag.TryAdminLogin = false;
+            }
+
+            if (model != null && !IsValidEmailId(model.Email))
+            {
+                ViewBag.wrongEmail = true;
+                return View();
+            }
+            else
+            {
+                ViewBag.wrongEmail = false;
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Login, Email = model.Email };
@@ -110,6 +131,18 @@ namespace aspnet5.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        private bool IsValidEmailId(string InputEmail)
+        {
+            //Regex To validate Email Address
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(InputEmail);
+            if (match.Success)
+                return true;
+            else
+                return false;
+        }
+
 
         //
         // POST: /Account/LogOff
