@@ -19,15 +19,6 @@ namespace aspnet5.Models
 
         public DbSet<UserStat> UserStats { get; set; }
 
-        private readonly IOptions<DataSettings> dataSettings;
-        public ApplicationDbContext(IOptions<DataSettings> dataSettings)
-        {
-            this.dataSettings = dataSettings;
-        }
-
-        protected override void OnConfiguring(EntityOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(dataSettings.Options.ConnectionString);
-        }
+        
     }
 }

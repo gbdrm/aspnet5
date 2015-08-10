@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Identity;
 using System.Security.Claims;
 using aspnet5.Models;
-using aspnet5.Services;
+using Microsoft.AspNet.Mvc;
 
 namespace aspnet5.Controllers
 {
     public class HomeController : Controller
     {
         private ApplicationDbContext db;
-
-        [FromServices]
-        public TestService TestService { get; set; }
 
         public HomeController(ApplicationDbContext dataContext)
         {
@@ -24,8 +18,6 @@ namespace aspnet5.Controllers
 
         public IActionResult Index()
         {
-            var test = TestService.TestName;
-
             return View();
         }
 
@@ -83,7 +75,7 @@ namespace aspnet5.Controllers
         [HttpPost]
         public IActionResult Messages(string messageText)
         {
-            if (!User.Identity.IsAuthenticated) return View();
+            if (!User.Identity.IsAuthenticated || string.IsNullOrEmpty(messageText)) return View();
 
             var date = DateTime.Now;
             //var lastMessage = db.Messages.LastOrDefault(u => u.Author == User.Identity.Name);
@@ -104,7 +96,7 @@ namespace aspnet5.Controllers
                 Author = User.Identity.Name,
                 //Date = date.ToShortDateString(),
                 Text = messageText,
-                Time = date.ToString()
+                Time = date.ToString(CultureInfo.InvariantCulture)
             };
 
             db.Messages.Add(msg);
