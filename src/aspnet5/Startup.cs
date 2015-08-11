@@ -40,6 +40,8 @@ namespace aspnet5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSettings>(Configuration.GetConfigurationSection("AppSettings"));
+
             // Add Entity Framework services to the services container.
             // In this release there is no data provider for non Windows environment so this app
             // uses the InMemory Store. This is coming in a future release of the Framework.

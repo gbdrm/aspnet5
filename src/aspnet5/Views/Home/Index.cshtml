@@ -15,9 +15,11 @@
             <div class="container">
                 <div class="carousel-caption">
                     <p>
-                        Learn how to build ASP.NET apps that can run anywhere.
+                        @*Learn how to build ASP.NET apps that can run anywhere.*@
+                        Узнайте как создать приложения ASP.NET, которые можно запустить где угодно.
                         <a class="btn btn-default btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                            Learn More
+                            @*Learn More*@
+                            Узать больше
                         </a>
                     </p>
                 </div>
@@ -28,9 +30,11 @@
             <div class="container">
                 <div class="carousel-caption">
                     <p>
-                        There are powerful new features in Visual Studio for building modern web apps.
+                        @*There are powerful new features in Visual Studio for building modern web apps.*@
+                        Новая функциональность Visual Studio для создания современных приложений.
                         <a class="btn btn-default btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                            Learn More
+                            @*Learn More*@
+                            Узать больше
                         </a>
                     </p>
                 </div>
@@ -41,9 +45,11 @@
             <div class="container">
                 <div class="carousel-caption">
                     <p>
-                        Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
+                        @*Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.*@
+                        Добавляем библиотеки из NuGet, Bower и npm, а также используем Grunt или Gulp.
                         <a class="btn btn-default btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                            Learn More
+                            @*Learn More*@
+                            Узать больше
                         </a>
                     </p>
                 </div>
@@ -54,9 +60,11 @@
             <div class="container">
                 <div class="carousel-caption">
                     <p>
-                        Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
+                        @*Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.*@
+                        Узнайте как облачная платформа Microsoft Azure позволяет вам создавать, развертывать и масштабировать приложения.
                         <a class="btn btn-default btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                            Learn More
+                            @*Learn More*@
+                            Узать больше
                         </a>
                     </p>
                 </div>
@@ -66,33 +74,60 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Демо функциональность</h2>
-        <ul>
-            <li><a style="font-size:large" asp-controller="Home" asp-action="Messages">Сообщения</a></li>
-            <li><a style="font-size:large" asp-controller="Home" asp-action="Test">Тест</a></li>
+    <div class="col-md-6">
+        @*<h4>Top voted topics:</h4>*@
+        <h2>Наиболее интресные темы</h2>
+        <p>Если вам интересно узнать что-то о ASP.NET 5, но не хватает информации, вы можете добавить эту тему в список или проголосовать за уже существующую</p>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                <a href="" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                <span class="badge">214</span>
+                <b>Dependency injection</b>
+                <p>Что собой представляет новый функционал для внедрения зависимостей</p>
+            </li>
+            <li class="list-group-item">
+                <a href="" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                <a href="" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                <span class="badge">104</span>
+                <b>Localization</b>
+                <p>Как работает новая локализация, что уже готово на даный момент</p>
+            </li>
+            <li class="list-group-item">
+                <a href="" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                <a href="" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                <span class="badge">14</span>
+                <b>Новые консольные команды</b>
+                <p>Что можно сделать с консоли и как добавлять новые команды</p>
+            </li>
         </ul>
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-plus"></span> Добавить новую тему...
+        </button>
+        
+        <br/>
+        <a href="/home/messages">Обсудить в чате</a>
     </div>
-    <div class="col-md-4">
-        <h2>Customize app</h2>
-        <ul>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398600">Add Controllers and Views</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398602">Add Data using EntityFramework</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398603">Add Authentication using Identity</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398606">Add real time support using SignalR</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398604">Add Class library</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517848">Add client packages using Bower</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517849">Manage client packages using Grunt</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517850">Develop on different platforms</a></li>
-        </ul>
+    <div class="col-md-1">
     </div>
-    <div class="col-md-4">
-        <h2>Run & Deploy</h2>
+    <div class="col-md-5">
+        @*<h2>Customize app</h2>
+            <ul>
+                <li><a href="http://go.microsoft.com/fwlink/?LinkID=398600">Add Controllers and Views</a></li>
+                <li><a href="http://go.microsoft.com/fwlink/?LinkID=398602">Add Data using EntityFramework</a></li>
+                <li><a href="http://go.microsoft.com/fwlink/?LinkID=398603">Add Authentication using Identity</a></li>
+                <li><a href="http://go.microsoft.com/fwlink/?LinkID=398606">Add real time support using SignalR</a></li>
+                <li><a href="http://go.microsoft.com/fwlink/?LinkID=398604">Add Class library</a></li>
+                <li><a href="http://go.microsoft.com/fwlink/?LinkID=517848">Add client packages using Bower</a></li>
+                <li><a href="http://go.microsoft.com/fwlink/?LinkID=517849">Manage client packages using Grunt</a></li>
+                <li><a href="http://go.microsoft.com/fwlink/?LinkID=517850">Develop on different platforms</a></li>
+            </ul>*@
+        <h2>ASP.NET 5 Roadmap</h2>
         <ul>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517851">Run your app locally</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517852">Run your app on ASP.NET Core 5</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517853">Run commands defined in your project.json</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Sites</a></li>
+            <li>ASP.NET 5 beta 8 - планируется 21 сентября 2015</li>
+            <li>ASP.NET 5 beta 7 - планируется 24 августа 2015</li>
+            <li><a href="https://github.com/aspnet/Home/releases/tag/v1.0.0-beta6">Релиз ASP.NET 5 beta 6</a></li>
+            <li><a href="https://github.com/aspnet/Home/releases/tag/v1.0.0-beta5">Релиз ASP.NET 5 beta 5</a></li>
         </ul>
     </div>
 </div>

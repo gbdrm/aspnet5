@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using aspnet5.Models;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Framework.OptionsModel;
 
 namespace aspnet5.Controllers
 {
