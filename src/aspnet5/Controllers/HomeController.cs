@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using aspnet5.Models;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.OptionsModel;
 
 namespace aspnet5.Controllers
 {
@@ -106,16 +107,17 @@ namespace aspnet5.Controllers
             return Messages();
         }
 
+
         public IActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewData["Message"] = "Your application description page.";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewData["Message"] = "Your contact page.";
 
             return View();
         }

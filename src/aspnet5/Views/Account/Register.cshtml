@@ -1,6 +1,4 @@
-@using System.Threading.Tasks
-@using aspnet5.Models
-@model aspnet5.Models.RegisterViewModel
+﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -9,7 +7,7 @@
 
 <form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
     <h4>Create a new account.</h4>
-    <hr />
+    <hr/>
     @if (ViewBag.TryAdminLogin != null && ViewBag.TryAdminLogin == true)
     {
         <h3 style="color:red;">Please do not use ADMIN substring in your login</h3>

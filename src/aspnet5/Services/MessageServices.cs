@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,14 +21,5 @@ namespace aspnet5.Services
             // Plug in your SMS service here to send a text message.
             return Task.FromResult(0);
         }
-    }
-    public interface IEmailSender
-    {
-        Task SendEmailAsync(string email, string subject, string message);
-    }
-
-    public interface ISmsSender
-    {
-        Task SendSmsAsync(string number, string message);
     }
 }

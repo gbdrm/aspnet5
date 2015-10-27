@@ -1,26 +1,27 @@
 using System;
 using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations.Infrastructure;
+using Microsoft.Data.Entity.Migrations;
 using aspnet5.Models;
 
-namespace aspnet5Migrations
+namespace aspnet5.Migrations
 {
-    [ContextType(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        public override void BuildModel(ModelBuilder builder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
-            builder
-                .Annotation("ProductVersion", "7.0.0-beta6-13815")
-                .Annotation("SqlServer:ValueGenerationStrategy", "IdentityColumn");
+            modelBuilder
+                .Annotation("ProductVersion", "7.0.0-beta8-15964")
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
                 {
                     b.Property<string>("Id");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .ConcurrencyToken();
+                        .IsConcurrencyToken();
 
                     b.Property<string>("Name")
                         .Annotation("MaxLength", 256);
@@ -28,7 +29,7 @@ namespace aspnet5Migrations
                     b.Property<string>("NormalizedName")
                         .Annotation("MaxLength", 256);
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Index("NormalizedName")
                         .Annotation("Relational:Name", "RoleNameIndex");
@@ -36,7 +37,7 @@ namespace aspnet5Migrations
                     b.Annotation("Relational:TableName", "AspNetRoles");
                 });
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -47,12 +48,12 @@ namespace aspnet5Migrations
 
                     b.Property<string>("RoleId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "AspNetRoleClaims");
                 });
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -63,12 +64,12 @@ namespace aspnet5Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "AspNetUserClaims");
                 });
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -78,30 +79,30 @@ namespace aspnet5Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("LoginProvider", "ProviderKey");
+                    b.HasKey("LoginProvider", "ProviderKey");
 
                     b.Annotation("Relational:TableName", "AspNetUserLogins");
                 });
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId");
 
                     b.Property<string>("RoleId");
 
-                    b.Key("UserId", "RoleId");
+                    b.HasKey("UserId", "RoleId");
 
                     b.Annotation("Relational:TableName", "AspNetUserRoles");
                 });
 
-            builder.Entity("aspnet5.Models.ApplicationUser", b =>
+            modelBuilder.Entity("aspnet5.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .ConcurrencyToken();
+                        .IsConcurrencyToken();
 
                     b.Property<string>("Email")
                         .Annotation("MaxLength", 256);
@@ -131,7 +132,7 @@ namespace aspnet5Migrations
                     b.Property<string>("UserName")
                         .Annotation("MaxLength", 256);
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Index("NormalizedEmail")
                         .Annotation("Relational:Name", "EmailIndex");
@@ -142,7 +143,7 @@ namespace aspnet5Migrations
                     b.Annotation("Relational:TableName", "AspNetUsers");
                 });
 
-            builder.Entity("aspnet5.Models.Message", b =>
+            modelBuilder.Entity("aspnet5.Models.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -155,10 +156,10 @@ namespace aspnet5Migrations
 
                     b.Property<string>("Time");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
                 });
 
-            builder.Entity("aspnet5.Models.QuestTask", b =>
+            modelBuilder.Entity("aspnet5.Models.QuestTask", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -171,10 +172,10 @@ namespace aspnet5Migrations
 
                     b.Property<string>("Title");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
                 });
 
-            builder.Entity("aspnet5.Models.UserAnswer", b =>
+            modelBuilder.Entity("aspnet5.Models.UserAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -185,10 +186,10 @@ namespace aspnet5Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
                 });
 
-            builder.Entity("aspnet5.Models.UserStat", b =>
+            modelBuilder.Entity("aspnet5.Models.UserStat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -197,38 +198,38 @@ namespace aspnet5Migrations
 
                     b.Property<string>("Token");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
                 });
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
-                    b.Reference("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
-                        .InverseCollection()
+                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
+                        .WithMany()
                         .ForeignKey("RoleId");
                 });
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.Reference("aspnet5.Models.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("aspnet5.Models.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.Reference("aspnet5.Models.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("aspnet5.Models.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
-            builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
                 {
-                    b.Reference("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
-                        .InverseCollection()
+                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
+                        .WithMany()
                         .ForeignKey("RoleId");
 
-                    b.Reference("aspnet5.Models.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("aspnet5.Models.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
         }

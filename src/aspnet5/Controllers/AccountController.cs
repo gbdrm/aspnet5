@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Authentication;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using aspnet5;
 using aspnet5.Models;
 using aspnet5.Services;
+using aspnet5.ViewModels.Account;
 
 namespace aspnet5.Controllers
 {
@@ -63,7 +61,7 @@ namespace aspnet5.Controllers
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set shouldLockout: true
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
@@ -111,7 +109,6 @@ namespace aspnet5.Controllers
 
             if (ViewBag.TryAdminLogin || ViewBag.wrongEmail) return View();
             EnsureDatabaseCreated(_applicationDbContext);
-
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Login, Email = model.Email };
@@ -121,7 +118,7 @@ namespace aspnet5.Controllers
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Context.Request.Scheme);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                     //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                     //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -203,7 +200,7 @@ namespace aspnet5.Controllers
         {
             if (User.IsSignedIn())
             {
-                return RedirectToAction(nameof(ManageController.Index), "Manage");
+                return RedirectToAction(nameof(ManageController.Index),"Manage");
             }
 
             if (ModelState.IsValid)
@@ -278,7 +275,7 @@ namespace aspnet5.Controllers
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
                 //var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Context.Request.Scheme);
+                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                 //await _emailSender.SendEmailAsync(model.Email, "Reset Password",
                 //   "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
                 //return View("ForgotPasswordConfirmation");
@@ -450,15 +447,11 @@ namespace aspnet5.Controllers
         // when publishing your application.
         private static void EnsureDatabaseCreated(ApplicationDbContext context)
         {
-            // Uncomment this code if you are using Entity Framework with a relational store such as Sql Server.
-            //if (!_databaseChecked)
-            //{
-            //    _databaseChecked = true;
-            //    if (!context.Database.AsRelational().Exists())
-            //    {
-            //        context.Database.AsRelational().ApplyMigrations();
-            //    }
-            //}
+            if (!_databaseChecked)
+            {
+                _databaseChecked = true;
+                context.Database.Migrate();
+            }
         }
 
         private void AddErrors(IdentityResult result)
@@ -471,7 +464,7 @@ namespace aspnet5.Controllers
 
         private async Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return await _userManager.FindByIdAsync(Context.User.GetUserId());
+            return await _userManager.FindByIdAsync(HttpContext.User.GetUserId());
         }
 
         private IActionResult RedirectToLocal(string returnUrl)

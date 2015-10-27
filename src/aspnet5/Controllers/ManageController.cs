@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
-using System.Security.Principal;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
-using aspnet5;
 using aspnet5.Models;
 using aspnet5.Services;
+using aspnet5.ViewModels.Manage;
 
 namespace aspnet5.Controllers
 {
@@ -354,7 +353,7 @@ namespace aspnet5.Controllers
 
         private async Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return await _userManager.FindByIdAsync(Context.User.GetUserId());
+            return await _userManager.FindByIdAsync(HttpContext.User.GetUserId());
         }
 
         private IActionResult RedirectToLocal(string returnUrl)
